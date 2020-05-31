@@ -1,7 +1,4 @@
-
-
 # README
-
 ## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
@@ -9,26 +6,36 @@
 |password|string|null: false|
 |username|string|null: false|
 ### Association
-- has_many :posts
-- has_many :comments
+- has_many :messages
+- has_many :groups, through:  users_groups
+- has_many :users_groups
 
-## postsテーブル
+## messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|title|text|null: false|
-|text|text|null: false|
-|user_id|integer|null: false, foreign_key: true|
+|body|text|null: false|
+|groups|reference|null: false, foreign_key: true|
+|users|reference|null: false, foreign_key: true|
+|image|stirng||
 ### Association
 - belongs_to :user
-- has_many :comments
-- has_many :posts_tags
-- has_many  :tags,  through:  :posts_tags
-
-## groups_usersテーブル
-|Column|Type|Options|
-|------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
-### Association
 - belongs_to :group
+
+## users_groupsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|users|reference|null: false, foreign_key: true|
+|groups|reference|null: false, foreign_key: true|
+### Association
 - belongs_to :user
+- belongs_to :group
+
+
+## groupsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|name|text|null: false|
+### Association
+- has_many :messeges
+- has_many  :users,  through:  :users_groups
+- has_many  :users_groups
