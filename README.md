@@ -4,18 +4,18 @@
 |------|----|-------|
 |email|string|null: false|
 |password|string|null: false|
-|username|string|null: false|
+|name|string|null: false|
 ### Association
 - has_many :messages
-- has_many :groups, through:  users_groups
+- has_many :groups, through:  ：users_groups
 - has_many :users_groups
 
 ## messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
-|body|text|null: false|
-|groups|reference|null: false, foreign_key: true|
-|users|reference|null: false, foreign_key: true|
+|body|text||
+|group|reference|null: false, foreign_key: true|
+|user|reference|null: false, foreign_key: true|
 |image|stirng||
 ### Association
 - belongs_to :user
@@ -24,8 +24,8 @@
 ## users_groupsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|users|reference|null: false, foreign_key: true|
-|groups|reference|null: false, foreign_key: true|
+|user|reference|null: false, foreign_key: true|
+|group|reference|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
 - belongs_to :group
